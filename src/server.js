@@ -17,11 +17,10 @@ app.get('/', ( request, response ) => {
   response.render('index')
 })
 
+app.post('/', (request, response) => {
 
-
-// app.post('/', (request, response) => {
-  //response.redirect('home')
-// })
+  response.render('index')
+})
 
 // app.put('', ( request, response ) => {
 //     response.render('home')
