@@ -7,17 +7,20 @@
     "start": "nodemon src/server.js",
     "db:create": "createdb tdl",
     "db:drop": "dropdb tdl",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha src/test/*-test.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.7",
     "express": "^4.15.5",
     "knex": "^0.13.0",
     "materialize-css": "^0.100.2",
+    "mocha": "^3.5.3",
+    "moment": "^2.18.1",
     "path": "^0.12.7"
   }
 }
