@@ -4,6 +4,8 @@ $(document).ready(function(){
 
   const url = 'http://localhost:3000'
 
+
+//task counter
   const itemCount = document.querySelector('.pending')
   let numberOfTodos;
   if (itemCount) {
@@ -20,7 +22,7 @@ $(document).ready(function(){
    console.log(itemCount)
   }
 
-
+//date format
   const dateField = document.querySelector('.today')
   const formattedDate = moment(Date.now()).format("dddd, MMMM Do YYYY")
   if(dateField){
@@ -28,7 +30,7 @@ $(document).ready(function(){
   }
 
 
-
+//add todo
   const addSubmit = document.querySelector('.addButton')
   addSubmit.addEventListener('click', () => {
     const ee = document.getElementById('addTodo').value
@@ -40,7 +42,7 @@ $(document).ready(function(){
     }
 
   })
-
+//delete function
   const remove = document.querySelectorAll('.delete')
   remove.forEach(row => {
     row.addEventListener('click', (event) => {
@@ -113,5 +115,16 @@ const deleteTodo = (id, target) => {
 }
 
 //update todo
+const contentField = document.querySelectorAll('.content')
+contentField.forEach(todo => {
+  todo.addEventListener('click', () => {
+    console.log('li clicked')
+  })
+})
+
+const editTodo = (id, target) => {
+
+
+}
 
 })
