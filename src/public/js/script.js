@@ -32,16 +32,27 @@ $(document).ready(function(){
 
 //add todo
   const addSubmit = document.querySelector('.addButton')
-  addSubmit.addEventListener('click', () => {
-    const ee = document.getElementById('addTodo').value
-    if(ee === ''){
-      alert('You must enter somtething to do!!')
-    } else {
-      newPost(ee)
-      window.location = url
-    }
+  const ee = document.getElementById('addTodo')
+  if(ee) {
+    addSubmit.addEventListener('click', (event) => {
+      if(ee.value === ''){
+        alert('You must enter somtething to do!!')
+      } else {
+        newPost(ee.value)
+        window.location = url
+      }
+    })
+    console.log(ee)
+    ee.addEventListener('keyup', (event) => {
+      if(ee.value === ''){
+        alert('You must enter somtething to do!!')
+      } else {
+        newPost(ee.value)
+        window.location = url
+      }
+    })
+}
 
-  })
 //delete function
   const remove = document.querySelectorAll('.delete')
   remove.forEach(row => {
@@ -123,8 +134,6 @@ contentField.forEach(todo => {
     let todoValue = todoContent.innerHTML
     let liNode = todoContent.parentNode
     liNode.innerHTML = `<textarea id="textarea1" class="materialize-textarea">${todoValue}</textarea>`
-
-
   })
 })
 
