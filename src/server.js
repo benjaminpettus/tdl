@@ -4,9 +4,6 @@ const bodyParser = require('body-parser')
 const app = express()
 const port = process.env.PORT || 3000
 const db = require('./db/queries')
-console.log('db in server_+_+',db)
-
-
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))

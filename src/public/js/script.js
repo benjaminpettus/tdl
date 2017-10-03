@@ -119,8 +119,11 @@ const contentField = document.querySelectorAll('.content')
 contentField.forEach(todo => {
   todo.addEventListener('click', (event) => {
     console.log('li clicked')
-    let todoContent = event.target.innerHTML
-    console.log(todoContent)
+    let todoContent = event.target
+    let todoValue = todoContent.innerHTML
+    let liNode = todoContent.parentNode
+    liNode.innerHTML = `<textarea id="textarea1" class="materialize-textarea">${todoValue}</textarea>`
+
 
   })
 })
