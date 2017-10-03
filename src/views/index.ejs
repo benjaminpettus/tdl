@@ -7,19 +7,27 @@
       <div class="card grey darken-1">
         <div class="card-content white-text">
           <div class="row">
-            <span class="card-title col m5"><h5>Monday, 25th</h5></span>
-            <span class="card-title col m4 push-m4"><h6>4 tasks pending</h6></span>
+            <span class="card-title col m5"><h5 class="today">Monday, 25th</h5></span>
+            <span class="card-title col m4 push-m4"><h6 class="pending"><%= todos.length %> tasks pending</h6></span>
           </div>
         </div>
         <ul class="collection">
-          <li class="collection-item"><a href="#!" class="secondary-content"><i class="material-icons">delete</i></a>Stuff</li>
-          <li class="collection-item">Alvin</li>
-          <li class="collection-item">Alvin</li>
-          <li class="collection-item">Alvin</li>
+            <%console.log('from view::::',todos.length)%>
+          <% Object.values(todos).forEach(function (todo) { %>
+
+            <li class="collection-item delete"><a href="#!" class="secondary-content"><i class="material-icons" data-id='<%= todo.id %>'>delete</i></a><span><%= todo.content %></span></li>
+          <% }) %>
         </ul>
       </div>
     </div>
   </div>
+
+  <!-- Modal Trigger -->
+
+  <a class="btn-floating waves-effect waves-light btn addButton" href="/new"><i class="material-icons">add</i></a>
+
+
+
 </div>
 
 
