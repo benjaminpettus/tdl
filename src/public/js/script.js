@@ -117,8 +117,11 @@ const deleteTodo = (id, target) => {
 //update todo
 const contentField = document.querySelectorAll('.content')
 contentField.forEach(todo => {
-  todo.addEventListener('click', () => {
+  todo.addEventListener('click', (event) => {
     console.log('li clicked')
+    let todoContent = event.target.innerHTML
+    console.log(todoContent)
+
   })
 })
 
