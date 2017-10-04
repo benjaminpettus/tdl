@@ -4,14 +4,18 @@ $(document).ready(function(){
   $('#modal1').modal()
   const url = 'http://localhost:3000'
 
-(req, res, next) => {
-  todos.getAll()
-  .then(todos => {
-    res.render('todos/index', {todos})
-  })
-  .catch(error => {
-    next(error)
-  })
+// (req, res, next) => {
+//   todos.getAll()
+//   .then(todos => {
+//     res.render('todos/index', {todos})
+//   })
+//   .catch(error => {
+//     next(error)
+//   })
+// }
+
+const ELEMENTS = {
+  deleteButtons: () => document.querySelectorAll('.delete')
 }
 
 const CONTROLLER = {
@@ -20,10 +24,21 @@ const CONTROLLER = {
     .then(todos => {
         UI.refreshTodos(todos)
     })
-  }
+  },
+
+  addTodo: (event) => {
+    const id = event.target.dataset.id
+    const target = event.target
+    const todo = 1 // find todo data using the event
+    DATA.addTodo(todo)
+    .then(response => {
+      UI.deleteTodo(target)
+    })
+    .catch( error => console.error )
+  },
 
   deleteTodo: (event) => {
-    const id = event.target.dataset.id,
+    const id = event.target.dataset.id
     const target = event.target
     DATA.deleteTodo(id)
     .then(response => {
@@ -31,7 +46,6 @@ const CONTROLLER = {
     })
     .catch( error => console.error )
   }
-
 }
 
 const DATA = {
@@ -43,6 +57,10 @@ const DATA = {
     .then(response => {
       return response.text()
     })
+  },
+
+  addTodo: function(todo) {
+
   }
 }
 
@@ -51,12 +69,20 @@ const UI = {
     const row = todoElement.parentNode.parentNode
     row.parentNode.removeChild(row)
     subtractTodo()
-    console.log(itemCount)
+  },
+
+  refreshTodos: function(todos) {
+
   },
 
   addAllEventListeners: function() {
-    document.querySelectorAll('.delete').forEach(row => {
-      row.addEventListener('click', CONTROLLER.deleteTodo)
+    ELEMENTS.deleteButtons().forEach(row => {
+      row.addEventListener('click', (event) => {
+        console.log(event.target)
+        confirm('are you sure you want to delete?')
+          ? CONTROLLER.deleteTodo(event)
+          : event.preventDefault()
+      })
     })
 
   }
