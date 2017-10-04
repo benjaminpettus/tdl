@@ -126,20 +126,37 @@ const deleteTodo = (id, target) => {
 }
 
 //update todo
-const contentField = document.querySelectorAll('.content')
-contentField.forEach(todo => {
-  todo.addEventListener('click', (event) => {
-    console.log('li clicked')
-    let todoContent = event.target
-    let todoValue = todoContent.innerHTML
-    let liNode = todoContent.parentNode
-    liNode.innerHTML = `<textarea id="textarea1" class="materialize-textarea">${todoValue}</textarea>`
+  $.fn.editable.defaults.mode = 'inline'
+  $.fn.editable.defaults.ajaxOptions = {type: "PUT"}
+
+  $('.content').each(function(){
+    // console.log(typeof this.previousSibling.childNodes[0].dataset.id)
+    $( this ).editable({
+        type: 'text',
+        pk: this.previousSibling.childNodes[0].dataset.id,
+        url: 'http://localhost:3000/update',
+        name: 'content',
+
+    })
   })
-})
+// const contentField = document.querySelectorAll('.content')
+// contentField.forEach(todo => {
+//   let todoContent,
+//       todoValue,
+//       liNode
+//   todo.addEventListener('click', (event) => {
+//     todoContent = event.target
+//     todoValue = todoContent.innerHTML
+//     liNode = todoContent.parentNode
+//     liNode.innerHTML = `<textarea id="textarea1" class="materialize-textarea">${todoValue}</textarea>`
+//   })
+//
+//
+// })
 
-const editTodo = (id, target) => {
-
-
-}
+// const editTodo = (id, target) => {
+//
+//
+// }
 
 })

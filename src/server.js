@@ -37,7 +37,15 @@ app.delete('/:id', ( request, response ) => {
   console.log(id)
   db.deleteTodo(id)
   .then( () => {
-    response.json({message: 'sucessfully deleted'})
+    response.json({ message: 'sucessfully deleted' })
+  })
+})
+
+app.put('/update', ( request, response ) => {
+  const { value, pk } = request.body
+  db.updateTodo( pk, value )
+  .then( () => {
+    response.json({ message: 'update successful' })
   })
 })
 

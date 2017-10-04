@@ -12,7 +12,6 @@
           </div>
         </div>
         <ul class="collection">
-            <%console.log('from view::::',todos.length)%>
           <% Object.values(todos).forEach(function (todo) { %>
 
             <li class="collection-item"><a href="#!" class="secondary-content"><i class="material-icons delete" data-id='<%= todo.id %>'>delete</i></a><span class="content"><%= todo.content %></span></li>

@@ -19,8 +19,15 @@ const deleteTodo = (id) => {
   return knex('todos').where('id', id).del()
 }
 
+const updateTodo = (id, newContent) => {
+  return knex('todos').where('id', id)
+    .update({
+      content: newContent
+    })
+}
 module.exports = {
   addTodo,
   getAll,
-  deleteTodo
+  deleteTodo,
+  updateTodo
 }
