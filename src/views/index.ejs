@@ -23,7 +23,26 @@
 
   <!-- Modal Trigger -->
 
-  <a class="btn-floating waves-effect waves-light btn addButton" href="/new"><i class="material-icons">add</i></a>
+  <a class="btn-floating waves-effect waves-light btn modal-trigger addButton" href="/new"><i class="material-icons">add</i></a>
+
+<div id="modal1" class="modal">
+
+</div>
+  <h4>Add Todo</h4>
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="addTodo" class="materialize-textarea"></textarea>
+          <label for="textarea1">What do you need To Do?</label>
+        </div>
+      </div>
+      <input type="submit" style="display: none" />
+      <a class="addButton" class="modal-action modal-close waves-effect waves-green btn-flat ">Save</a>
+    </form>
+  </div>
+
+
 
 
 
