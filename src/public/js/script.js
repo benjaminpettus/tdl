@@ -1,7 +1,7 @@
 $(document).ready(function(){
   console.log('fully loaded')
 
-
+  $('#modal1').modal()
   const url = 'http://localhost:3000'
 
 
@@ -42,15 +42,15 @@ $(document).ready(function(){
         window.location = url
       }
     })
-    console.log(ee)
-    ee.addEventListener('keyup', (event) => {
-      if(ee.value === ''){
-        alert('You must enter somtething to do!!')
-      } else {
-        newPost(ee.value)
-        window.location = url
-      }
-    })
+    // console.log(ee)
+    // ee.addEventListener('keyup', (event) => {
+    //   if(ee.value === ''){
+    //     alert('You must enter somtething to do!!')
+    //   } else {
+    //     newPost(ee.value)
+    //     window.location = url
+    //   }
+    // })
 }
 
 //delete function
