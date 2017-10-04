@@ -4,6 +4,64 @@ $(document).ready(function(){
   $('#modal1').modal()
   const url = 'http://localhost:3000'
 
+(req, res, next) => {
+  todos.getAll()
+  .then(todos => {
+    res.render('todos/index', {todos})
+  })
+  .catch(error => {
+    next(error)
+  })
+}
+
+const CONTROLLER = {
+  getAllTodos: function() {
+    DATA.findAllTodos()
+    .then(todos => {
+        UI.refreshTodos(todos)
+    })
+  }
+
+  deleteTodo: (event) => {
+    const id = event.target.dataset.id,
+    const target = event.target
+    DATA.deleteTodo(id)
+    .then(response => {
+      UI.deleteTodo(target)
+    })
+    .catch( error => console.error )
+  }
+
+}
+
+const DATA = {
+  findAllTodos: function() {
+
+  },
+  deleteTodo: function(id) {
+    return fetch(`${url}/${id}`, {method: 'delete'})
+    .then(response => {
+      return response.text()
+    })
+  }
+}
+
+const UI = {
+  deleteTodo: function(todoElement) {
+    const row = todoElement.parentNode.parentNode
+    row.parentNode.removeChild(row)
+    subtractTodo()
+    console.log(itemCount)
+  },
+
+  addAllEventListeners: function() {
+    document.querySelectorAll('.delete').forEach(row => {
+      row.addEventListener('click', CONTROLLER.deleteTodo)
+    })
+
+  }
+}
+
 
 //task counter
   const itemCount = document.querySelector('.pending')
@@ -35,35 +93,30 @@ $(document).ready(function(){
   const ee = document.getElementById('addTodo')
   if(ee) {
     addSubmit.addEventListener('click', (event) => {
-      if(ee.value === ''){
+      if(ee.value == ''){
         alert('You must enter somtething to do!!')
-      } else {
+      }
+      else{
         newPost(ee.value)
         window.location = url
       }
     })
-    // console.log(ee)
-    // ee.addEventListener('keyup', (event) => {
-    //   if(ee.value === ''){
-    //     alert('You must enter somtething to do!!')
-    //   } else {
-    //     newPost(ee.value)
-    //     window.location = url
-    //   }
-    // })
 }
 
 //delete function
-  const remove = document.querySelectorAll('.delete')
-  remove.forEach(row => {
-    row.addEventListener('click', (event) => {
-      console.log('event data:::',event.target.dataset.id)
-      confirm('are you sure you want to delete?')
-        ? deleteTodo(event.target.dataset.id, event.target)
-        : event.preventDefault()
-    })
+  // document.querySelectorAll('.delete').forEach(row => {
+  //   row.addEventListener('click', (event) => {
+  //     confirm('are you sure you want to delete?')
+  //       ? deleteTodo(event.target.dataset.id, event.target)
+  //       : event.preventDefault()
+  //   })
+  //
+  // })
 
-  })
+
+UI.addAllEventListeners()
+
+
 
 //   const checkStatus = (response) => {
 //     if(response.status === 200) {
@@ -126,8 +179,8 @@ const deleteTodo = (id, target) => {
 }
 
 //update todo
-  $.fn.editable.defaults.mode = 'inline'
-  $.fn.editable.defaults.ajaxOptions = {type: "PUT"}
+  // $.fn.editable.defaults.mode = 'inline'
+  // $.fn.editable.defaults.ajaxOptions = {type: "PUT"}
 
   $('.content').each(function(){
     // console.log(typeof this.previousSibling.childNodes[0].dataset.id)
