@@ -4,9 +4,6 @@ const bodyParser = require('body-parser')
 const app = express()
 const port = process.env.PORT || 3000
 const db = require('./db/queries')
-console.log('db in server_+_+',db)
-
-
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
@@ -40,7 +37,15 @@ app.delete('/:id', ( request, response ) => {
   console.log(id)
   db.deleteTodo(id)
   .then( () => {
-    response.json({message: 'sucessfully deleted'})
+    response.json({ message: 'sucessfully deleted' })
+  })
+})
+
+app.put('/update', ( request, response ) => {
+  const { value, pk } = request.body
+  db.updateTodo( pk, value )
+  .then( () => {
+    response.json({ message: 'update successful' })
   })
 })
 

@@ -4,6 +4,8 @@ $(document).ready(function(){
 
   const url = 'http://localhost:3000'
 
+
+//task counter
   const itemCount = document.querySelector('.pending')
   let numberOfTodos;
   if (itemCount) {
@@ -20,7 +22,7 @@ $(document).ready(function(){
    console.log(itemCount)
   }
 
-
+//date format
   const dateField = document.querySelector('.today')
   const formattedDate = moment(Date.now()).format("dddd, MMMM Do YYYY")
   if(dateField){
@@ -28,19 +30,30 @@ $(document).ready(function(){
   }
 
 
-
+//add todo
   const addSubmit = document.querySelector('.addButton')
-  addSubmit.addEventListener('click', () => {
-    const ee = document.getElementById('addTodo').value
-    if(ee === ''){
-      alert('You must enter somtething to do!!')
-    } else {
-      newPost(ee)
-      window.location = url
-    }
+  const ee = document.getElementById('addTodo')
+  if(ee) {
+    addSubmit.addEventListener('click', (event) => {
+      if(ee.value === ''){
+        alert('You must enter somtething to do!!')
+      } else {
+        newPost(ee.value)
+        window.location = url
+      }
+    })
+    console.log(ee)
+    ee.addEventListener('keyup', (event) => {
+      if(ee.value === ''){
+        alert('You must enter somtething to do!!')
+      } else {
+        newPost(ee.value)
+        window.location = url
+      }
+    })
+}
 
-  })
-
+//delete function
   const remove = document.querySelectorAll('.delete')
   remove.forEach(row => {
     row.addEventListener('click', (event) => {
@@ -113,5 +126,37 @@ const deleteTodo = (id, target) => {
 }
 
 //update todo
+  $.fn.editable.defaults.mode = 'inline'
+  $.fn.editable.defaults.ajaxOptions = {type: "PUT"}
+
+  $('.content').each(function(){
+    // console.log(typeof this.previousSibling.childNodes[0].dataset.id)
+    $( this ).editable({
+        type: 'text',
+        pk: this.previousSibling.childNodes[0].dataset.id,
+        url: 'http://localhost:3000/update',
+        name: 'content',
+
+    })
+  })
+// const contentField = document.querySelectorAll('.content')
+// contentField.forEach(todo => {
+//   let todoContent,
+//       todoValue,
+//       liNode
+//   todo.addEventListener('click', (event) => {
+//     todoContent = event.target
+//     todoValue = todoContent.innerHTML
+//     liNode = todoContent.parentNode
+//     liNode.innerHTML = `<textarea id="textarea1" class="materialize-textarea">${todoValue}</textarea>`
+//   })
+//
+//
+// })
+
+// const editTodo = (id, target) => {
+//
+//
+// }
 
 })
